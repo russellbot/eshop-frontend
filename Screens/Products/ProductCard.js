@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         marginLeft: 10,
         alignItems: 'center',
-        elevation: 0,
+        elevation: 8,
         backgroundColor: 'white'
     },
     image: {
