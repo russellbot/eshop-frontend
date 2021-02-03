@@ -1,16 +1,18 @@
 import React from 'react';
-import { View, Stylesheet } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import { Content, Left, Body, ListItem, Thumbnail, Text } from 'native-base';
+
+var { width } = Dimensions.get('window')
 
 const SearchedProduct = (props) => {
     const { productsFiltered } = props;
     return(
-        <Content>
+        <Content style={{ width: width }}>
             {productsFiltered.length > 0 ? (
                 productsFiltered.map((item) => {
                     <ListItem
                         // onPress={navigation}
-                        key={item._id}
+                        key={item._id.$old}
                         avatar
                     >
                         <Left>
