@@ -9,7 +9,7 @@ const SearchedProduct = (props) => {
     return(
         <Content style={{ width: width }}>
             {productsFiltered.length > 0 ? (
-                productsFiltered.map((item) => {
+                productsFiltered.map((item) => (
                     <ListItem
                         // onPress={navigation}
                         key={item._id.$old}
@@ -25,7 +25,7 @@ const SearchedProduct = (props) => {
                             <Text note>{item.description}</Text>
                         </Body>
                     </ListItem>
-                })
+                ))
             ) : (
                 <View style={styles.center}>
                     <Text style={{ alignSelf: 'center' }}>
