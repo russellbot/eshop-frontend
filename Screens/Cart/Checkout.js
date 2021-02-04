@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
 
-const Checkout = () => {
+const Checkout = (props) => {
     return (
         <Text>CHECKOUT WORKS</Text>
     )
