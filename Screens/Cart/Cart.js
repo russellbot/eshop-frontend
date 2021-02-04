@@ -18,7 +18,7 @@ import * as actions from '../../Redux/Actions/cartActions';
 var { height, width } = Dimensions.get('window');
 
 const Cart = (props) => {
-
+    // Calculate total price of cart items
     var total = 0;
     props.cartItems.forEach(cart => {
         return (total += cart.product.price)
@@ -56,7 +56,10 @@ const Cart = (props) => {
                             <Text style={styles.price}>$ {total}</Text>
                         </Left>
                         <Right>
-                            <Button title="Clear" />
+                            <Button 
+                                title="Clear" 
+                                onPress={() => props.clearCart()}
+                            />
                         </Right>
                         <Right>
                             <Button 
@@ -80,6 +83,12 @@ const mapStateToProps = (state) => {
     const { cartItems } = state;
     return {
         cartItems: cartItems,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        clearCart: () => dispatch(actions.clearCart())
     }
 }
 
@@ -114,4 +123,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(mapStateToProps, null)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
