@@ -47,6 +47,7 @@ const ProductContainer = (props) => {
     };
   }, []);
 
+  // Product Methods
   const searchProduct = (text) => {
     setProductsFiltered(
       products.filter((i) => i.name.toLowerCase().includes(text.toLowerCase()))

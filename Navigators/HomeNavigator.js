@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStackNavigator, creatStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import ProductContainer from '../Screens/Products/ProductContainer';
 import SingleProduct from '../Screens/Products/SingleProduct';
