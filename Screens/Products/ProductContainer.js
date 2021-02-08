@@ -9,15 +9,15 @@ import {
 } from "react-native";
 import { Container, Header, Icon, Item, Input, Text } from "native-base";
 
+import baseURL from "../../assets/common/baseUrl";
+import axios from 'axios';
+
 import ProductList from "./ProductList";
 import SearchedProduct from "./SearchedProducts";
 import Banner from "../../Shared/Banner";
 import CategoryFilter from "./CategoryFilter";
 
 var { height } = Dimensions.get("window");
-
-const data = require("../../assets/data/products.json");
-const productCategories = require("../../assets/data/categories.json");
 
 const ProductContainer = (props) => {
   const [products, setProducts] = useState([]);
@@ -28,14 +28,28 @@ const ProductContainer = (props) => {
   const [active, setActive] = useState();
   const [initialState, setInitialState] = useState([]);
 
-  useEffect(() => {
-    setProducts(data);
-    setProductsFiltered(data);
-    setFocus(false);
-    setCategories(productCategories);
-    setProductsCtg(data);
+  useEffect(() => {    
+    setFocus(false);   
     setActive(-1);
-    setInitialState(data);
+
+    // Products
+    axios
+      .get(`${baseURL}products`)
+      .then((res) => {
+        setProducts(res.data);
+        setProductsFiltered(res.data);
+        setProductsCtg(res.data);
+        setInitialState(res.data);
+      })
+      .catch((error) => console.log('api call error'))
+
+    // Categories
+    axios
+      .get(`${baseURL}categories`)
+      .then((res) => {
+        setCategories(res.data);
+      })
+      .catch((error) => console.log('api call error'))
 
     return () => {
       setProducts([]);
