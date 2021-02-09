@@ -10,8 +10,8 @@ export const loginUser = (user, dispatch) => {
         method: "POST",
         body: JSON.stringify(user),
         headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
+            Accept: "application/json",
+            "Content-Type": "application/json",
         },
     })
     .then((res) => res.json())
