@@ -27,16 +27,16 @@ const ListHeader = () => {
         >
             <View style={styles.headerItem}></View>
             <View style={styles.headerItem}>
-                <Text style={{ fontWeight: '600' }}>Brand</Text>
+                <Text style={{ fontWeight: "bold" }}>Brand</Text>
             </View>
             <View style={styles.headerItem}>
-                <Text style={{ fontWeight: '600' }}>Name</Text>
+                <Text style={{ fontWeight: "bold" }}>Name</Text>
             </View>
             <View style={styles.headerItem}>
-                <Text style={{ fontWeight: '600' }}>Category</Text>
+                <Text style={{ fontWeight: "bold" }}>Category</Text>
             </View>
             <View style={styles.headerItem}>
-                <Text style={{ fontWeight: '600' }}>Price</Text>
+                <Text style={{ fontWeight: "bold" }}>Price</Text>
             </View>
         </View>
     )
@@ -79,6 +79,17 @@ const Products = (props) => {
         )
     )
 
+    const searchProduct = (text) => {
+        if (text == "") {
+            setProductFilter(productList)
+        }
+        setProductFilter(
+            productList.filter((i) => 
+                i.name.toLowerCase().includes(text.toLowerCase())
+            )
+        )
+    }
+
   return (
       <View>
           <View>
@@ -87,7 +98,7 @@ const Products = (props) => {
                     <Icon name="search" />
                     <Input 
                         placeholder="Search"
-                        // onChange to do
+                        onChangeText={(text) => searchProduct(text)}
                     />
                 </Item>
               </Header>
