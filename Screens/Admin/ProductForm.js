@@ -38,6 +38,19 @@ const ProductForm = (props) => {
     const [numReviews, setNumReviews] = useState(0);
     const [item, setItem] = useState(null);
 
+    useEffect(() => {
+        
+        // Categories
+        axios
+            .get(`${baseURL}categories`)
+            .then((res) => setCategories(res.data))
+            .catch((error) => alert('error loading categories'))
+        
+        return () => {
+            setCategories([]);
+        }
+    }, [])
+
     return (
         <FormContainer title="Add Product">
             <View>
@@ -98,6 +111,31 @@ const ProductForm = (props) => {
                 value={description}
                 onChangeText={(text) => setDescription(text)}
             />
+            <Item picker>
+                <Picker
+                    mode="dropdown"
+                    iosIcon={<Icon color={"#007aff"} name="arrow-down" />}
+                    style={{ width: undefined }}
+                    placeholder="Select your Category"
+                    selectedValue={pickerValue}
+                    placeholderStyle={{ color: "#007aff"}}
+                    onValueChange={(e) => [setPickerValue(e), setCategory(e)]}
+                >
+                    {categories.map((c) => {
+                        return <Picker.Item key={c.id} label={c.name} value={c.id} />
+                    })}
+                </Picker>
+            </Item>
+            {err ? <Error message={err} /> : null}
+            <View style={styles.buttonContainer}>
+                <EasyButton
+                    large
+                    primary
+                    // onPress To Do
+                >
+                    <Text style={styles.buttonText}>Confirm</Text>
+                </EasyButton>
+            </View>
         </FormContainer>
     )
 }
@@ -106,6 +144,15 @@ const styles = StyleSheet.create({
     label: {
         width: '80%',
         marginTop: 10
+    },
+    buttonContainer: {
+        width: '80%',
+        marginBottom: 80,
+        marginTop: 20,
+        alignItems: 'center'
+    },
+    buttonText: {
+        color: 'white'
     }
 })
 
