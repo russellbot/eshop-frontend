@@ -41,6 +41,22 @@ const ProductForm = (props) => {
     const [item, setItem] = useState(null);
 
     useEffect(() => {
+
+        // Check for route params
+        if(!props.route.params) {
+            setItem(null);
+        } else {
+            setItem(props.route.params.item);
+            setBrand(props.route.params.item.brand);
+            setName(props.route.params.item.name);
+            setPrice(props.route.params.item.price.toString());
+            setDescription(props.route.params.item.description);
+            setMainImage(props.route.params.item.image);
+            setImage(props.route.params.item.image);
+            setCategory(props.route.params.item.category._id);
+            setCountInStock(props.route.params.item.countInStock.toString());
+        }
+
         // Get Authorization Token
         AsyncStorage.getItem("jwt")
             .then((res) => {
@@ -101,10 +117,10 @@ const ProductForm = (props) => {
         // change image URI to work with IOS
         const newImageUri = "file:///" + image.split("file:/").join("");
 
-        formData.append("image", {
+        formData.append("image", (props.route.params.item.image) ? image : {
             uri: newImageUri,
             type: mime.getType(newImageUri),
-            name: newImageUri.split('/').pop()
+            name: newImageUri.split("/").pop()
         });
         formData.append("name", name);
         formData.append("brand", brand);
@@ -123,8 +139,33 @@ const ProductForm = (props) => {
                 Authorization: `Bearer ${token}`
             }
         }
-
-        axios
+        
+        if(item !== null) {
+            axios
+            .put(`${baseURL}products/${item.id}`, formData, config)
+            .then((res) => {
+                if(res.status == 200 || res.status == 201) {
+                    Toast.show({
+                        topOffset: 60,
+                        type: "success",
+                        text1: "Product successfully updated",
+                        text2: ""
+                    });
+                    setTimeout(() => {
+                        props.navigation.navigate("Products");
+                    }, 500)
+                }
+            })
+            .catch((error) => {
+                Toast.show({
+                    topOffset: 60,
+                    type: "error",
+                    text1: "Something went wrong",
+                    text2: "Please try again"
+                })
+            })
+        } else {
+            axios
             .post(`${baseURL}products`, formData, config)
             .then((res) => {
                 if(res.status == 200 || res.status == 201) {
@@ -147,6 +188,7 @@ const ProductForm = (props) => {
                     text2: "Please try again"
                 })
             })
+        }        
     }
 
     return (
