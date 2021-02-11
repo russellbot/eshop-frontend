@@ -16,6 +16,7 @@ import ListItem from './ListItem';
 import axios from 'axios';
 import baseURL from '../../assets/common/baseUrl';
 import AsyncStorage from '@react-native-community/async-storage';
+import EasyButton from '../../Shared/StyledComponents/EasyButton';
 
 var { height, width } = Dimensions.get('window');
 
@@ -103,7 +104,33 @@ const Products = (props) => {
     }
 
   return (
-      <View>
+      <View style={styles.container}>
+        <View style={styles.buttonContainer}>
+            <EasyButton
+                secondary
+                medium
+                onPress={() => props.navigation.navigate("Orders")}
+            >
+                <Icon name="shopping-bag" size={18} color="white" />
+                <Text style={styles.buttonText}>Orders</Text>
+            </EasyButton>
+            <EasyButton
+                secondary
+                medium
+                onPress={() => props.navigation.navigate("ProductForm")}
+            >
+                <Icon name="plus" size={18} color="white" />
+                <Text style={styles.buttonText}>Products</Text>
+            </EasyButton>
+            <EasyButton
+                secondary
+                medium
+                onPress={() => props.navigation.navigate("Categories")}
+            >
+                <Icon name="plus" size={18} color="white" />
+                <Text style={styles.buttonText}>Categories</Text>
+            </EasyButton>
+        </View>
           <View>
               <Header searchBar rounded>
                 <Item style={{ padding: 5 }}>
@@ -154,6 +181,19 @@ const styles = StyleSheet.create({
         height: height / 2,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    container: {
+        marginBottom: 160,
+        backgroundColor: 'white'
+    },
+    buttonContainer: {
+        margin: 20,
+        alignSelf: 'center',
+        flexDirection: 'row'
+    },
+    buttonText: {
+        marginLeft: 4,
+        color: 'white'
     }
 })
 
