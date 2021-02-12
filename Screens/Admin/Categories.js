@@ -55,6 +55,25 @@ const Categories = (props) => {
         }
     }, [])
 
+    const addCategory = () => {
+        const category = {
+            name: categoryName
+        };
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        };
+
+        axios
+        .post(`${baseURL}categories`, category, config)
+        .then((res) => setCategories([...categories, res.data]))
+        .catch((error) => alert('Error loading categories'));
+
+        setCategoryName('');
+    }
+
     return (
         <View style={{ position: 'relative', height: '100%' }}>
             <View style={{ marginBottom: 60 }}>
@@ -81,7 +100,7 @@ const Categories = (props) => {
                     <EasyButton
                         medium
                         primary
-                        // onPress to do
+                        onPress={() => addCategory()}
                     >
                         <Text style={{ color: 'white', fontWeight: 'bold' }}>Submit</Text>
                     </EasyButton>
