@@ -114,10 +114,10 @@ const ProductForm = (props) => {
         }
 
         let formData = new FormData();
-        // change image URI to work with IOS
-        const newImageUri = "file:///" + image.split("file:/").join("");
+        // change image URI to work with IOS        
+        const newImageUri = "file:///" + image.split("file:/").join("");            
 
-        formData.append("image", (props.route.params.item.image) ? image : {
+        formData.append("image", (props.route.params) ? image : {
             uri: newImageUri,
             type: mime.getType(newImageUri),
             name: newImageUri.split("/").pop()
