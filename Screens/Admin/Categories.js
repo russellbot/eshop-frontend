@@ -11,6 +11,7 @@ import EasyButton from '../../Shared/StyledComponents/EasyButton';
 import baseURL from '../../assets/common/baseUrl';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
+import { set } from 'react-native-reanimated';
 
 var { width } = Dimensions.get('window');
 
@@ -21,7 +22,7 @@ const Item = (props) => {
             <EasyButton
                 danger
                 medium
-                // onPress to do
+                onPress={() => props.delete(props.item._id)}
             >
                 <Text style={{ color: 'white', fontWeight: 'bold' }}>Delete</Text>
             </EasyButton>
@@ -74,13 +75,29 @@ const Categories = (props) => {
         setCategoryName('');
     }
 
+    const deleteCategory = (id) => {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        };
+
+        axios
+        .delete(`${baseURL}categories/${id}`, config)
+        .then((res) => {
+            const newCategories = categories.filter((item) => item.id !== id);
+            setCategories(newCategories);
+        })
+        .catch((error) => alert('Error loading categories'));
+    }
+
     return (
         <View style={{ position: 'relative', height: '100%' }}>
             <View style={{ marginBottom: 60 }}>
                 <FlatList 
                     data={categories}
                     renderItem={({ item, index}) => (
-                        <Item item={item} index={index} />
+                        <Item item={item} index={index} delete={deleteCategory}/>
                     )}
                     keyExtractor={(item) => item.id}
                 />
