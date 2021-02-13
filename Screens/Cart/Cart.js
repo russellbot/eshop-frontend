@@ -1,14 +1,16 @@
 import React from 'react';
-import { View, Dimensions, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { 
+    View, 
+    Dimensions, 
+    StyleSheet, 
+    TouchableOpacity 
+} from 'react-native';
 import {
     Container,
     Text,
     Left,
     Right,
-    H1,
-    ListItem,
-    Thumbnail,
-    Body
+    H1
 } from 'native-base';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import CartItem from './CartItem';
