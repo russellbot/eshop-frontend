@@ -25,12 +25,15 @@ const OrderCard = (props) => {
     const [cardColor, setCardColor] = useState();
 
     useEffect(() => {
-        // get token from local storage
-        AsyncStorage.getItem("jwt")
-        .then((res) => {
-            setToken(res)
-        })
-        .catch((error) => console.log(error))
+
+        if (props.editMode) {
+            // get token from local storage
+            AsyncStorage.getItem("jwt")
+            .then((res) => {
+                setToken(res)
+            })
+            .catch((error) => console.log(error))
+        }        
         
         if (props.status == "3") {
             setOrderStatus(<TrafficLight unavailable></TrafficLight>);
@@ -125,28 +128,32 @@ const OrderCard = (props) => {
                     <Text>Price: </Text>
                     <Text style={styles.price}>$ {props.totalPrice}</Text>
                 </View>
-                <Picker
-                    mode="dropdown"
-                    iosIcon={<Icon color={"#007aff"} name="arrow-down" />}
-                    style={{ width: undefined }}
-                    selectedValue={statusChange}
-                    placeholder="Change Status"
-                    placeholderIconColor={{ color: '#007aff'}}
-                    onValueChange={(e) => setStatusChange(e)}
-                >
-                    {codes.map((c) => {
-                        return (
-                            <Picker.Item key={c.code} label={c.name} value={c.code} />
-                        )
-                    })}
-                </Picker>
-                <EasyButton
-                    secondary
-                    large
-                    onPress={() => updateOrder()}
-                >
-                    <Text style={{ color: 'white' }}>Update</Text>
-                </EasyButton>
+                {props.editMode ? (
+                    <View>
+                        <Picker
+                            mode="dropdown"
+                            iosIcon={<Icon color={"#007aff"} name="arrow-down" />}
+                            style={{ width: undefined }}
+                            selectedValue={statusChange}
+                            placeholder="Change Status"
+                            placeholderIconColor={{ color: '#007aff'}}
+                            onValueChange={(e) => setStatusChange(e)}
+                        >
+                            {codes.map((c) => {
+                                return (
+                                    <Picker.Item key={c.code} label={c.name} value={c.code} />
+                                )
+                            })}
+                        </Picker>
+                        <EasyButton
+                            secondary
+                            large
+                            onPress={() => updateOrder()}
+                        >
+                            <Text style={{ color: 'white' }}>Update</Text>
+                        </EasyButton>
+                    </View> 
+                ) : null}                               
             </View>
         </View>
     )
