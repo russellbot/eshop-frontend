@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Image, StyleSheet, Dimensions, View, ScrollView } from "react-native";
 import Swiper from "react-native-swiper/src";
-import { useEffect } from "react/cjs/react.development";
 
 var { width } = Dimensions.get("window");
 

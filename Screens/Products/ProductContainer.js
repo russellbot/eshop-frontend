@@ -46,7 +46,7 @@ const ProductContainer = (props) => {
             setInitialState(res.data);
             setLoading(false);
           })
-          .catch((error) => console.log('api call error'))
+          .catch((error) => console.log('api call error products'))
 
         // Categories
         axios
@@ -54,7 +54,7 @@ const ProductContainer = (props) => {
           .then((res) => {
             setCategories(res.data);
           })
-          .catch((error) => console.log('api call error'))
+          .catch((error) => console.log('api call error categories'))
         
         return () => {
           setProducts([]);
