@@ -11,8 +11,11 @@ const Banner = () => {
   useEffect(() => {
     setBannerData([
       "https://images.vexels.com/media/users/3/126443/preview2/ff9af1e1edfa2c4a46c43b0c2040ce52-macbook-pro-touch-bar-banner.jpg",
-      "https://pbs.twimg.com/media/D7P_yLdX4AAvJWO.jpg",
+      "https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+      "https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
       "https://www.yardproduct.com/blog/wp-content/uploads/2016/01/gardening-banner.jpg",
+      "https://images.unsplash.com/photo-1607083206325-caf1edba7a0f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1356&q=80",
+      "https://images.unsplash.com/photo-1598511726903-ef08ef6eff94?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
     ]);
 
     return () => {
