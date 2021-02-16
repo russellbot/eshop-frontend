@@ -1,7 +1,7 @@
 ## ez-shop FrontEnd 
 
-## Deployed Url
-to do
+## Link to Android Download
+https://russellbot.github.io/eshop-frontend/
 
 ## Sample
 ******
